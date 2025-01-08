@@ -1,10 +1,24 @@
 # Docker Image
 
-We provide a [Dockerfile](Dockerfile) to build an image.
+## CUDA Docker
+
+For modern cuda docker integrations you'll need recent a docker version and the nvidia-container-toolkit
+
+Docker:
+```shell
+# This will install the latest docker for your system regardless of how
+# you installed it. Could break things If you have something custom.
+curl -fsSL https://get.docker.com | sed 's/sleep [0-9]*/sleep 0/g' | sh
+```
+
+Nvidia container toolkit:
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+
+
+## Build
 
 ```shell
-# build an image with PyTorch 1.6, CUDA 10.1
-docker build -t mmagic docker/
+docker build -t mmagic .
 ```
 
 Run it with
@@ -14,6 +28,6 @@ docker run --gpus all --shm-size=8g -it -v {DATA_DIR}:/mmagic/data mmagic
 ```
 
 **Note**:
-Versions defined in this [Dockerfile](Dockerfile) is not up-to-date.
+Prior documentation used pytorch images. Refer to prior commits if needed. Versions defined in this [Dockerfile](Dockerfile) is not up-to-date.
 If you use this Dockerfile in your project, you probably want to make some updates.
 Feel free to submit an issue or PR for the update.
